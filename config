@@ -1,5 +1,3 @@
-# Default config for sway
-#
 # Copy this to ~/.config/sway/config and edit it to your liking.
 #
 # Read `man 5 sway` for a complete reference.
@@ -14,7 +12,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term alacritty
+set $term foot
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -48,9 +46,9 @@ output * bg /usr/share/wallpapers/MilkyWay/contents/images/5120x2880.png fill
 #
 # Example configuration:
 #
-input "1267:91:Elan_Touchpad" {
+#input "1267:91:Elan_Touchpad" {
 #       dwt enabled
-       tap enabled
+#       tap enabled
 #       natural_scroll enabled
 #       middle_emulation enabled
 }
@@ -200,6 +198,7 @@ bindsym $mod+r mode "resize"
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
+# I recommend using waybar with sway, hence the waybar argument is included in the following function
 bar {
     position top
 	swaybar_command waybar
@@ -215,21 +214,21 @@ bar {
 }
 
 include /etc/sway/config.d/*
+
+#the following function sets your keyboard layout
 input * {
-	xkb_layout "fi"
+	xkb_layout "<the short name for your keyboard layout>"
+	xkb_variant "<the specific variant, such as no dead keys etc..., completely optional>"
 }
 
+#dunst is a notification-daemon, without a notification-daemon apps like discord may become unresponsive when trying to display notifications
 exec --no-startup-id dunst
+
+# The following lines are for configuring volume and brightness controls
+# In order for the brightness control to function you need brightnessctl installed on your system
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
-
-exec_always import-gsettings
-set $gnome-schema org.gnome.desktop.interface
-
-exec_always {
-gsettings set $gnome-schema gtk-theme "Adwaita:dark"
-}
