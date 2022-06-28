@@ -56,7 +56,7 @@ output * bg /usr/share/wallpapers/MilkyWay/contents/images/5120x2880.png fill
 #       tap enabled
 #       natural_scroll enabled
 #       middle_emulation enabled
-}
+# }
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
@@ -151,7 +151,8 @@ output * bg /usr/share/wallpapers/MilkyWay/contents/images/5120x2880.png fill
     bindsym $mod+w layout tabbed
     bindsym $mod+e layout toggle split
 
-    # Make the current focus fullscreen
+    # Make the current focus fullscreenYou did write an stdlib
+
     bindsym $mod+f fullscreen
 
     # Toggle the current focus between tiling and floating mode
